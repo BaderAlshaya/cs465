@@ -1,49 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
 
-		<style type="text/css">
-			.header {
-				padding:10px;
-			}
+  <style type="text/css">
+    .container {
+      display: inline-block;
+    }
 
-			.content {
-				padding:10px;
-			}
+    .header {
+      padding: 10px;
+      color: #FFFFFF;
+      background-color: #000000;
+      border-bottom: 1px solid;
+    }
 
-			.content > ul {
-				margin:0px 0px 0px -20px;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="container">
-			<div class="header">
-				first
-			</div>
-			<div class="content">
-				<ul>
-					<li>first</li>
-					<li>second</li>
-					<li>third</li>
-				</ul>
-			</div>
-		</div>
+    .content {
+      padding: 10px;
+      border: 1px solid;
+    }
 
-		<div class="container">
-			<div class="header">
-				second
-			</div>
-			<div class="content">
-				<ul>
-					<li>first</li>
-					<li>second</li>
-					<li>third</li>
-				</ul>
-			</div>
-		</div>
-	</body>
+    .content>ul {
+      margin: 0px 0px 0px -20px;
+      list-style-type: square;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      first
+    </div>
+    <div class="content">
+      <ul>
+        <li>first</li>
+        <li>second</li>
+        <li>third</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="header">
+      second
+    </div>
+    <div class="content">
+      <ul>
+        <li>first</li>
+        <li>second</li>
+        <li>third</li>
+      </ul>
+    </div>
+  </div>
+</body>
+
 </html>
