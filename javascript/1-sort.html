@@ -1,26 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
 
-		<script type="text/javascript">
-			var functionSort = function(intInput) {
-				// sort intInput and return the sorted array
+  <script type="text/javascript">
+    function swap(intInput, i, j) {
+      var temp = intInput[i];
+      intInput[i] = intInput[j];
+      intInput[j] = temp;
+    }
 
-				// note that like in c, an array is a reference to a continuous memory block
-				// while the input it is being passed by value, it points to the same memory block
-				// returning the input is thus not really necessary / is redundant
+    // sort intInput and return the sorted array
+    // note that like in c, an array is a reference to a continuous memory block
+    // while the input is being passed by value, it points to the same memory block
+    // returning the input is thus not really necessary / is redundant
+    var functionSort = function(intInput) {
+      for (var i = 0; i < intInput.length; ++i) {
+        for (var j = 1; j < intInput.length; ++j) {
+          if (intInput[j - 1] > intInput[j]) {
+            swap(intInput, j - 1, j);
+          }
+        }
+      }
+      return intInput;
+    };
 
-				return intInput;
-			};
+    console.log(functionSort([5, 4, 3, 2, 1])); // expected: [1, 2, 3, 4, 5]
+    console.log(functionSort([51, 64, 70, 45, 22])); // expected: [22, 45, 51, 64, 70]
+  </script>
+</head>
 
-			console.log(functionSort([5, 4, 3, 2, 1])); // expected: [1, 2, 3, 4, 5]
-			console.log(functionSort([51, 64, 70, 45, 22])); // expected: [22, 45, 51, 64, 70]
-		</script>
-	</head>
-	<body>
+<body>
+</body>
 
-	</body>
 </html>
