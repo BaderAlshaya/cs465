@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
 
-		<script type="text/javascript">
-			var functionReplace = function(strInput) {
-				// return strInput with 'quick' replaced by 'sly' and 'lazy' replaced by 'sharp', regardless of the case of the letters
+  <script type="text/javascript">
+    // return strInput with 'quick' replaced by 'sly' and 'lazy' replaced by 'sharp', regardless of the case of the letters
+    // note that you will have to use a regexp for this task
+    // using strInput.split('quick').join('sly') is commonly suggested for doing string replacement
+    // this will not work this exercise though, as the matching is required to be case insensitive
+    var functionReplace = function(strInput) {
+      strInput = strInput.replace(/quick/ig, 'sly');
+      strInput = strInput.replace(/lazy/ig, 'sharp');
+      return strInput;
+    };
 
-				// note that you will have to use a regexp for this task
-				// using strInput.split('quick').join('sly') is commonly suggested for doing string replacement
-				// this will not work this exercise though, as the matching is required to be case insensitive
+    console.log(functionReplace('the QUICK brown fox is quick')); // expected: 'the sly brown fox is sly'
+    console.log(functionReplace('jumps OVER the lazy dog')); // expected: 'jumps OVER the sharp dog'
+  </script>
+</head>
 
-				return strInput;
-			};
+<body>
+</body>
 
-			console.log(functionReplace('the QUICK brown fox is quick')); // expected: 'the sly brown fox is sly'
-			console.log(functionReplace('jumps OVER the lazy dog')); // expected: 'jumps OVER the sharp dog'
-		</script>
-	</head>
-	<body>
-
-	</body>
 </html>
