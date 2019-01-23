@@ -9,12 +9,12 @@
     // return a string of the concatenated numbers in dblInput, separated by commas and with three digits after the decimal point
     var functionEnumerate = function(dblInput) {
       var concatenated = '';
-      for (var i = 0; i < dblInput.length; ++i) {
-        if (i != dblInput.length - 1) {
+      var length = dblInput.length;
+      for (var i = 0; i < length; ++i) {
+        if (i != length - 1)
           concatenated += dblInput[i].toFixed(3) + ', ';
-        } else if (i == dblInput.length - 1) {
+        else
           concatenated += dblInput[i].toFixed(3);
-        }
       }
       return concatenated;
     };
