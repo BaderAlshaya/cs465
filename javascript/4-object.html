@@ -1,47 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
 
-		<script type="text/javascript">
-			var objectStrings = {};
+  <script type="text/javascript">
+    var objectStrings = {};
 
-			var functionInsert = function(strKey, strValue) {
-				// insert the property with strKey and strValue into objectStrings
-			};
+    // insert the property with strKey and strValue into objectStrings
+    var functionInsert = function(strKey, strValue) {
+      objectStrings[strKey] = strValue;
+    };
 
-			var functionDelete = function(strKey) {
-				// remove the property with strKey from objectStrings
-			};
+    // remove the property with strKey from objectStrings
+    var functionDelete = function(strKey) {
+      delete objectStrings[strKey];
+    };
 
-			var functionLookup = function(strKey) {
-				// return the strValue from objectStrings that is associated with strKey
+    // return the strValue from objectStrings that is associated with strKey
+    // objectStrings might not contain strKey
+    // should this be the case, return an empty string
+    var functionLookup = function(strKey) {
+      var result = '';
+      if (objectStrings[strKey])
+        result = objectStrings[strKey];
+      return result;
+    };
 
-				// objectStrings might not contain strKey
-				// should this be the case, return an empty string
+    // return a string of the concatenated strKey in objectStrings, separated by commas
+    var functionKeys = function() {
+      return Object.keys(objectStrings).join(', ');
+    };
 
-				return '';
-			};
+    functionInsert('hello', 'world');
+    functionInsert('lorem', 'ipsum');
+    functionInsert('sit', 'amet');
+    console.log(functionKeys()); // expected: 'hello, lorem, sit' (order may be different)
+    console.log(functionLookup('lorem')); // expected: 'ipsum'
+    functionDelete('lorem');
+    console.log(functionKeys()); // expected: 'hello, sit' (order may be different)
+    console.log(functionLookup('lorem')); // expected: ''
+  </script>
+</head>
 
-			var functionKeys = function() {
-				// return a string of the concatenated strKey in objectStrings, separated by commas
+<body>
 
-				return '';
-			};
+</body>
 
-			functionInsert('hello', 'world');
-			functionInsert('lorem', 'ipsum');
-			functionInsert('sit', 'amet');
-			console.log(functionKeys()); // expected: 'hello, lorem, sit' (order may be different)
-			console.log(functionLookup('lorem')); // expected: 'ipsum'
-			functionDelete('lorem');
-			console.log(functionKeys()); // expected: 'hello, sit' (order may be different)
-			console.log(functionLookup('lorem')); // expected: ''
-		</script>
-	</head>
-	<body>
-
-	</body>
 </html>
