@@ -1,26 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css" />
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <style type="text/css">
+    body {
+      padding-top: 20px;
+    }
+  </style>
+</head>
 
-		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css" />
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<body>
+  <div class="container">
+    <!-- use an inline form to accomplish the horizontal layout. -->
+    <div class="form-inline">
+      <div class="form-group mr-2">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="amount">
+          <div class="input-group-append">
+            <span class="input-group-text"><i class="fa fa-dollar"></i></span>
+          </div>
+        </div>
+      </div>
 
-		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+      <button type="button" class="btn btn-primary mr-2">
+        <i class="fa fa-shopping-cart"></i>
+      </button>
 
-		<style type="text/css">
-			body {
-				padding-top:20px;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="container">
-			<!-- use an inline form to accomplish the horizontal layout. -->
-		</div>
-	</body>
+      <button type="button" class="btn btn-primary mr-2">
+        <i class="fa fa-trash"></i>
+      </button>
+    </div>
+  </div>
+</body>
+
 </html>
