@@ -14,7 +14,7 @@ var server = http.createServer(function(req, res) {
 
   // http://localhost:8080/test/hello should return 'you have accessed "hello" within test' in plain text
   // http://localhost:8080/test/world should return 'you have accessed "world" within test' in plain text
-  if (req.url.indexOf('/test/') == 0) {
+  if (req.url.search('/test/') != -1) {
     res.writeHead(200, {'Content-Type': 'text/plain'});
     res.write('you have accessed "' + decodeURIComponent(req.url.substr(6)) + '" within test');
     return res.end();
@@ -41,11 +41,10 @@ var server = http.createServer(function(req, res) {
   //       </table>
   //     </body>
   //   </html>
-  if (req.url.indexOf('/attributes') == 0) {
-    var attrs = querystring.parse(url.parse(req.url).query);
+  if (req.url.search('/attributes') != -1) {
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.write('<!DOCTYPE html><html><body><table border="1">');
-
+    var attrs = querystring.parse(url.parse(req.url).query);
     for (var strKey in attrs)
       res.write('<tr><td>' + strKey + '</td><td>' + attrs[strKey] + '</td></tr>');
     res.write('</table></body></html>');
