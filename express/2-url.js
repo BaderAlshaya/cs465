@@ -30,3 +30,41 @@ var express = require('express'); // do not change this line
 //       </table>
 //     </body>
 //   </html>
+
+var server = express();
+server.get('/', function(req, res) {
+  res.status(200);
+  res.set({
+    'Content-Type': 'text/plain'
+  });
+  res.write('you have accessed the root');
+  res.end();
+});
+
+server.get('/test/:var', function(req, res) {
+  res.status(200);
+  res.set({
+    'Content-Type': 'text/plain'
+  });
+  res.write('you have accessed "' + req.params.var + '" within test');
+  res.end();
+});
+
+server.get('/attributes', function(req, res) {
+  res.status(200);
+  res.set({
+    'Content-Type': 'text/html'
+  });
+  res.write('<!DOCTYPE html><html><body><table border="1">');
+  for (var str in req.query) {
+    res.write('<tr><td>' + str + '</td><td>' + req.query[str] + '</td></tr>');
+  }
+  res.write('</table></body></html>');
+  res.end();
+});
+
+server.get('/unexpected', function(req, res) {
+  res.end();
+});
+
+server.listen(process.env.PORT || 8080);
