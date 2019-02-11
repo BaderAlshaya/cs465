@@ -3,8 +3,6 @@
 var express = require('express'); // do not change this line
 var session = require('express-session'); // do not change this line
 
-// preface: use the express-session middleware with the memory storage which should make this task rather easy
-
 // http://localhost:8080/hello should return 'you must be new' in plain text and implicitly set an ident cookie by using the session middleware
 
 // http://localhost:8080/test should return 'your history:\n  /hello' in plain text
@@ -26,3 +24,33 @@ var session = require('express-session'); // do not change this line
 // [the server restarts and looses all cookies]
 
 // http://localhost:8080/servus should return 'you must be new' in plain text and implicitly set an ident cookie by using the session middleware
+
+var server = express();
+
+// preface: use the express-session middleware with the memory storage which should make this task rather easy
+server.use(session({
+  'secret': 'secret',
+  'cookie': {
+    'max-age': 86400
+  }
+}));
+
+server.get('*', function(req, res) {
+  res.status(200);
+  res.set({
+    'Content-Type': 'text/plain'
+  });
+
+  if (req.session.history == undefined)
+    req.session.history = [];
+
+  if (req.session.history.length)
+    res.write('your history:\n  ' + req.session.history.join('\n  '));
+  else
+    res.write('you must be new');
+
+  req.session.history.push(req.url);
+  res.end();
+});
+
+server.listen(process.env.PORT || 8080);
