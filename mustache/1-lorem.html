@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
-	</head>
-	<body>
-		<!--
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+</head>
+
+<body>
+  <!--
 			given a javascript object like:
 				{
 					'objectUser': {
@@ -19,5 +20,7 @@
 			use mustache to produce the output:
 				hello max mustermann, our message of today is: "hello world"
 		-->
-	</body>
+  hello {{objectUser.strFirst}} {{objectUser.strLast}}, our message of today is: "{{strMessage}}"
+</body>
+
 </html>
