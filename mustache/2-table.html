@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
-	</head>
-	<body>
-		<!--
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+</head>
+
+<body>
+  <!--
 			given a javascript object like:
 				{
 					'objectUsers': [
@@ -67,5 +68,21 @@
 					</tr>
 				</table>
 		-->
-	</body>
+
+  <table border="1">
+    <tr>
+      <th>name</th>
+      <th>gender</th>
+    </tr>
+    {{#objectUsers}}
+    {{#boolVisible}}
+    <tr>
+      <td>{{functionName}}</td>
+      <td>{{strGender}}</td>
+    </tr>
+    {{/boolVisible}}
+    {{/objectUsers}}
+  </table>
+</body>
+
 </html>
