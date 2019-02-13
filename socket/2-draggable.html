@@ -1,73 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="http://localhost:8080/socket.io/socket.io.js"></script>
 
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <style type="text/css">
+    #first {
+      position: absolute;
 
-		<script type="text/javascript" src="http://localhost:8080/socket.io/socket.io.js"></script>
+      top: 10px;
+      left: 10px;
 
-		<style type="text/css">
-			#first {
-				position:absolute;
+      background-color: #3E8AB7;
+    }
 
-				top:10px;
-				left:10px;
+    #second {
+      position: absolute;
 
-				background-color:#3E8AB7;
-			}
-			
-			#second {
-				position:absolute;
+      top: 10px;
+      left: 120px;
 
-				top:10px;
-				left:120px;
+      background-color: #8667BC;
+    }
 
-				background-color:#8667BC;
-			}
-			
-			#third {
-				position:absolute;
+    #third {
+      position: absolute;
 
-				top:120px;
-				left:10px;
+      top: 120px;
+      left: 10px;
 
-				background-color:#8AB73E;
-			}
-			
-			#fourth {
-				position:absolute;
+      background-color: #8AB73E;
+    }
 
-				top:120px;
-				left:120px;
+    #fourth {
+      position: absolute;
 
-				background-color:#B76B3E;
-			}
+      top: 120px;
+      left: 120px;
 
-			.draggable {
-				cursor:pointer;
+      background-color: #B76B3E;
+    }
 
-				width:100px;
-				height:100px;
-			}
-		</style>
-	</head>
-	<body>
-		<div id="first" class="draggable"></div>
-		<div id="second" class="draggable"></div>
-		<div id="third" class="draggable"></div>
-		<div id="fourth" class="draggable"></div>
+    .draggable {
+      cursor: pointer;
 
-		<script type="text/javascript">
-			var objectSocket = io.connect('http://localhost:8080/'); // do not change this line
+      width: 100px;
+      height: 100px;
+    }
+  </style>
+</head>
 
-			// when dragging an element around, send a 'drag' event to the server containing the strIdent of the element and the new intLeft as well as the new intTop position
-			// for example, when dragging the first div to the right, the 'drag' event might contain: { 'strIdent':'first', 'intLeft':100, 'intTop':10 }
+<body>
+  <div id="first" class="draggable"></div>
+  <div id="second" class="draggable"></div>
+  <div id="third" class="draggable"></div>
+  <div id="fourth" class="draggable"></div>
 
-			// when receiving a 'drag' event from the server, use the contained strIdent and the intLeft as well as intTop position to update the associated element
-			// for example, you might receive the following in the 'drag' event when the last div has been dragged to the left: { 'strIdent':'fourth', 'intLeft':20, 'intTop':120 }
-		</script>
-	</body>
+  <script type="text/javascript">
+    var objectSocket = io.connect('http://localhost:8080/'); // do not change this line
+
+    // when dragging an element around, send a 'drag' event to the server containing the strIdent of the element and the new intLeft as well as the new intTop position
+    // for example, when dragging the first div to the right, the 'drag' event might contain: { 'strIdent':'first', 'intLeft':100, 'intTop':10 }
+
+    // when receiving a 'drag' event from the server, use the contained strIdent and the intLeft as well as intTop position to update the associated element
+    // for example, you might receive the following in the 'drag' event when the last div has been dragged to the left: { 'strIdent':'fourth', 'intLeft':20, 'intTop':120 }
+    var strIdent = '';
+    var intLeft = 0;
+    var intTop = 0;
+
+    jQuery(document)
+      .on('mousemove', function(event) {
+        if (strIdent.length != 0) {
+          objectSocket.emit('drag', {
+            'strIdent': strIdent,
+            'intLeft': event.pageX - intLeft,
+            'intTop': event.pageY - intTop
+          });
+        }
+      })
+      .on('mouseup', function(event) {
+        strIdent = '';
+      });
+
+    jQuery('#first, #second, #third, #fourth')
+      .on('mousedown', function(event) {
+        if (event.which == 1) {
+          strIdent = jQuery(this).attr('id');
+          intLeft = event.pageX - jQuery(this).offset().left;
+          intTop = event.pageY - jQuery(this).offset().top;
+        }
+      });
+
+    objectSocket.on('drag', function(element) {
+      jQuery('#' + element.strIdent)
+        .css({
+          'left': element.intLeft + 'px',
+          'top': element.intTop + 'px'
+        });
+    });
+  </script>
+</body>
+
 </html>
