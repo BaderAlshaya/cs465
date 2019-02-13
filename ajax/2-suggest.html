@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
 
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	</head>
-	<body>
-		<input id="input" type="text" placeholder="input">
-		<br>
-		<pre id="output">output</pre>
-		
-		<script type="text/javascript">
-			// when somebody enters 'b' into the input textbox, the script should make a get request to: http://mercury.cs.pdx.edu/playground/ajax/suggest.json?strFile=b
-			// the data that is being received by this query is in the json format and might look like: { 'strFiles':['bash','bunzip2','busybox'] }
-			// this received data should subsequently set as the content of the output element as follows: 'bash\nbunzip2\nbusybox'
-		</script>
-	</body>
+<body>
+  <input id="input" type="text" placeholder="input">
+  <br>
+  <pre id="output">output</pre>
+
+  <script type="text/javascript">
+    // when somebody enters 'b' into the input textbox, the script should make a get request to: http://mercury.cs.pdx.edu/playground/ajax/suggest.json?strFile=b
+    // the data that is being received by this query is in the json format and might look like: { 'strFiles':['bash','bunzip2','busybox'] }
+    // this received data should subsequently set as the content of the output element as follows: 'bash\nbunzip2\nbusybox'
+    jQuery('#input')
+      .on('input', function() {
+        jQuery.ajax({
+          'url': 'http://mercury.cs.pdx.edu/playground/ajax/suggest.json?strFile=' + jQuery('#input').val(),
+          'success': function(output) {
+            jQuery('#output').text(output.strFiles.join('\n'));
+          }
+        });
+      });
+  </script>
+</body>
+
 </html>
